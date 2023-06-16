@@ -91,6 +91,34 @@ final class Widget
         );
     }
 
+    public function pow_captcha_placeholder()
+    {
+        return <<<EOD
+            <div id="pow-captcha-placeholder"></div>
+
+            <script>
+                window.myCaptchaCallback = (nonce) => {
+                    document.querySelector("form input[name='nonce']").value = nonce;
+                    document.querySelector("form input[type='submit']").disabled = false;
+                };
+
+                const url = '/wp-content/plugins/pow-captcha-for-wordpress/ajax.php';
+                const elementId = 'pow-captcha-placeholder';
+
+                fetch(url)
+                .then(response => response.text())
+                .then(html => {
+                    const element = document.getElementById(elementId);
+                    element.innerHTML = html;
+                    window.sqrCaptchaInit();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            </script>
+        EOD;
+    }
+
     public function pow_captcha_generate_widget_tag_from_plugin($plugin)
     {
         if (!$plugin->is_configured()) {
@@ -118,15 +146,6 @@ final class Widget
              data-sqr-captcha-challenge="$challenge"
              data-sqr-captcha-callback="myCaptchaCallback">
         </div>
-        EOD;
-
-        $form .= <<<EOD
-        <script>
-            window.myCaptchaCallback = (nonce) => {
-                document.querySelector("form input[name='nonce']").value = nonce;
-                document.querySelector("form input[type='submit']").disabled = false;
-            };
-        </script>
         EOD;
 
         return $form;

@@ -16,7 +16,7 @@ class ContactForm7
 
         add_filter(
             'wpcf7_form_elements',
-            [$this, 'pow_captcha_wpcf7_pow_captcha_add_widget_if_missing'],
+            [$this, 'pow_captcha_wpcf7_pow_captcha_add_placeholder_if_missing'],
             100,
             1
         );
@@ -25,6 +25,23 @@ class ContactForm7
         add_filter('wpcf7_spam', [$this, 'pow_captcha_wpcf7_pow_captcha_verify_response'], 9, 1);
         add_action('wpcf7_init', [$this, 'pow_captcha_wpcf7_pow_captcha_add_form_tag_pow_captcha'], 10, 0);
         wpcf7_add_form_tag('pow_captcha', [$this, 'pow_captcha_wpcf7_pow_captcha_widget_shortcode'], ['theme']);
+    }
+    public function pow_captcha_wpcf7_pow_captcha_add_placeholder_if_missing($elements)
+    {
+        $plugin = Core::$instance;
+
+        if (!$plugin->is_configured() or !$plugin->get_contact_form_7_active()) {
+            return $elements;
+        }
+
+        // Check if a widget is already present (probably through a shortcode)
+        if (preg_match('/<div.*id=".*pow-captcha-placeholder.*".*<\/div>/', $elements)) {
+            return $elements;
+        }
+
+        $elements .= $this->widget->pow_captcha_placeholder();
+
+        return $elements;
     }
 
     public function pow_captcha_wpcf7_pow_captcha_add_widget_if_missing($elements)
@@ -67,7 +84,6 @@ class ContactForm7
         if ($spam) {
             return $spam;
         }
-
 
         $submission = WPCF7_Submission::get_instance();
         $data = $submission->get_posted_data();

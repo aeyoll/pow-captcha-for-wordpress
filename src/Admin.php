@@ -10,7 +10,10 @@ class Admin
     {
         if (is_admin()) {
             add_action('admin_menu', [$this, 'pow_captcha_options_page']);
-            add_filter('plugin_action_links_pow-captcha-for-wordpress/pow-captcha-for-wordpress.php', [$this, 'pow_captcha_settings_link']);
+            add_filter(
+                'plugin_action_links_pow-captcha-for-wordpress/pow-captcha-for-wordpress.php',
+                [$this, 'pow_captcha_settings_link']
+            );
             add_action('admin_notices', [$this, 'pow_captcha_admin_notice__not_configured']);
         }
     }
@@ -57,8 +60,9 @@ class Admin
             ?>
             <div class="notice notice-error is-dismissible">
                 <p>
-                    <b>POW Captcha is not configured yet!</b>
-                    Visit the <a href="<?php echo $url ?>">POW Captcha settings</a> and enter a valid API key and API url to complete the setup.
+                    <strong>POW Captcha is not configured yet!</strong>
+                    Visit the <a href="<?php echo $url ?>">POW Captcha settings</a>
+                    and enter a valid API key and API url to complete the setup.
                 </p>
             </div>
             <?php

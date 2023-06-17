@@ -11,11 +11,11 @@
  */
 
 // If this file is called directly, abort.
-if (! defined('WPINC')) {
+if (!defined('WPINC')) {
     die;
 }
 
-define('POW_CAPTCHA_VERSION', '1.O.0');
+define('POW_CAPTCHA_VERSION', '1.0.0');
 
 require_once __DIR__ . '/vendor/autoload.php';
 

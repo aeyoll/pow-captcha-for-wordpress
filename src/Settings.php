@@ -79,8 +79,17 @@ class Settings
             $checked = checked(1, $setting, false);
         }
         ?>
-        <input autcomplete="none" type="<?php echo $type; ?>" name="<?php echo $option_name; ?>" id="<?php echo $option_name; ?>" value="<?php echo $value ?>" <?php echo $checked ?>>
-        <label class="description" for="<?php echo $option_name; ?>"><?php echo $description ?></label>
+        <input
+            autcomplete="none"
+            type="<?php echo $type; ?>"
+            name="<?php echo $option_name; ?>"
+            id="<?php echo $option_name; ?>"
+            value="<?php echo $value ?>" <?php echo $checked ?>>
+        <label
+            class="description"
+            for="<?php echo $option_name; ?>">
+            <?php echo $description ?>
+        </label>
         <?php
     }
 }

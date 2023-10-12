@@ -1,7 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../../../wp-config.php';
-require_once __DIR__ . '/vendor/autoload.php';
+require_once ABSPATH . '/vendor/autoload.php';
 
 use Aeyoll\PowCaptchaForWordpress\Core;
 use Aeyoll\PowCaptchaForWordpress\Widget;

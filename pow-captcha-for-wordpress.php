@@ -25,7 +25,7 @@ use Aeyoll\PowCaptchaForWordpress\Admin;
 use Aeyoll\PowCaptchaForWordpress\Modules\ContactForm7;
 
 // This creates the singleton instance
-if (!defined(Core::$instance)) {
+if (is_null(Core::$instance)) {
     $pow_captcha_plugin_instance = new Core();
     $pow_captcha_plugin_instance->init();
 

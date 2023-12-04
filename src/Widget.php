@@ -147,26 +147,47 @@ final class Widget
     public function pow_captcha_placeholder()
     {
         return <<<EOD
-            <div id="pow-captcha-placeholder"></div>
+            <div class="pow-captcha-placeholder"></div>
 
             <script>
-                window.myCaptchaCallback = (nonce) => {
-                    document.querySelector("form input[name='nonce']").value = nonce;
-                    document.querySelector("form input[type='submit']").disabled = false;
-                };
+                document.addEventListener('DOMContentLoaded', async function() {
+                    if (typeof window.myCaptchaCallback === 'function') {
+                        return;
+                    }
 
-                const url = '/wp-content/plugins/pow-captcha-for-wordpress/ajax.php';
-                const elementId = 'pow-captcha-placeholder';
+                    const url = '/wp-content/plugins/pow-captcha-for-wordpress/ajax.php';
+                    const selector = '.pow-captcha-placeholder';
+                    let captchaHtml = '';
 
-                fetch(url)
-                .then(response => response.text())
-                .then(html => {
-                    const element = document.getElementById(elementId);
-                    element.innerHTML = html;
-                    window.sqrCaptchaInit();
-                })
-                .catch(error => {
-                    console.error('Error:', error);
+                    window.myCaptchaCallback = (nonce) => {
+                        Array.from(document.querySelectorAll("input[name='nonce']")).forEach(e => e.value = nonce);
+                        Array.from(document.querySelectorAll("input[type='submit']")).forEach(e => e.disabled = false);
+                        Array.from(document.querySelectorAll("button[type='submit']")).forEach(e => e.disabled = false);
+                    };
+
+                    const captchas = Array.from(document.querySelectorAll(selector));
+
+                    // If there's no captcha on the page, abort
+                    if (captchas.length <= 0) {
+                        return;
+                    }
+
+                    fetch(url)
+                        .then(response => response.text())
+                        .then(html => {
+                            captchaHtml = html;
+
+                            // Assign captcha content to each captcha on the page
+                            captchas.forEach((captcha) => {
+                                captcha.innerHTML = html;
+                            });
+
+                            // Init the captcha
+                            window.sqrCaptchaInit();
+                        })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
                 });
             </script>
         EOD;

@@ -150,11 +150,11 @@ final class Widget
             <div class="pow-captcha-placeholder"></div>
 
             <script>
-                document.addEventListener('DOMContentLoaded', async function() {
-                    if (typeof window.myCaptchaCallback === 'function') {
-                        return;
-                    }
+                // Prevent multiple ajax calls
+                window.isPowCaptchaLoading = false;
 
+                function powCaptchaLoad() {
+                    window.isPowCaptchaLoading = true;
                     const url = '/wp-content/plugins/pow-captcha-for-wordpress/ajax.php';
                     const selector = '.pow-captcha-placeholder';
                     let captchaHtml = '';
@@ -184,10 +184,36 @@ final class Widget
 
                             // Init the captcha
                             window.sqrCaptchaInit();
+
+                            // Reset loader
+                            window.isPowCaptchaLoading = false;
                         })
                     .catch(error => {
                         console.error('Error:', error);
+
+                        // Reset loader
+                        window.isPowCaptchaLoading = false;
                     });
+                }
+
+                document.addEventListener('DOMContentLoaded', function() {
+                    if (typeof window.myCaptchaCallback === 'function') {
+                        return;
+                    }
+
+                    // Init captcha on document load
+                    powCaptchaLoad();
+                });
+
+                // Reload captchas after form submission
+                document.addEventListener('wpcf7submit', function(event) {
+                    if (!window.isPowCaptchaLoading) {
+                        // Allow to reset the captcha
+                        window.sqrCaptchaInitDone = false;
+
+                        // Fetch a new challenge using an API call
+                        powCaptchaLoad();
+                    }
                 });
             </script>
         EOD;

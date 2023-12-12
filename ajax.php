@@ -10,4 +10,9 @@ $pow_captcha_plugin_instance = new Core();
 $pow_captcha_plugin_instance->init();
 
 $cf7 = new Widget();
+
+header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+header('Cache-Control: post-check=0, pre-check=0', false);
+header('Pragma: no-cache');
+
 echo $cf7->pow_captcha_generate_widget_tag_from_plugin($pow_captcha_plugin_instance);

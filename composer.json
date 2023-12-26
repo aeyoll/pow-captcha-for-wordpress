@@ -2,6 +2,7 @@
     "name": "aeyoll/pow-captcha-for-wordpress",
     "description": "POW captcha for WordPress",
     "type": "wordpress-plugin",
+    "license": "GPL-3.0-or-later",
     "version": "1.0.0",
     "require": {
         "guzzlehttp/guzzle": "^7.7",

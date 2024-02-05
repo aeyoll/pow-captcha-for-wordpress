@@ -15,3 +15,19 @@ Require the plugin with Composer using the following command:
 ```sh
 composer require aeyoll/pow-captcha-for-wordpress
 ```
+
+Note, you must have "composer/installers" allowed in your `composer.json` order to property install the plugin:
+
+```json
+{
+    "name": "your/project",
+    "require": {
+        "aeyoll/pow-captcha-for-wordpress": "^1.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true
+        }
+    }
+}
+```

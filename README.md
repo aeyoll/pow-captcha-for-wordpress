@@ -22,7 +22,8 @@ Note, you must have "composer/installers" allowed in your `composer.json` order 
 {
     "name": "your/project",
     "require": {
-        "aeyoll/pow-captcha-for-wordpress": "^1.0"
+        "aeyoll/pow-captcha-for-wordpress": "^1.0",
+        "composer/installers": "^2.0"
     },
     "config": {
         "allow-plugins": {

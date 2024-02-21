@@ -7,7 +7,7 @@
  * Author: Jean-Philippe Bidegain
  * Author URI: https://github.com/aeyoll/pow-captcha-for-wordpress
  * Domain Path: /languages
- * Requires PHP: 7.4
+ * Requires PHP: 7.1
  */
 
 // If this file is called directly, abort.

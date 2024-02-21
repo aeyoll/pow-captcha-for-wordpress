@@ -3,7 +3,7 @@
     "description": "POW captcha for WordPress",
     "type": "wordpress-plugin",
     "license": "GPL-3.0-or-later",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "require": {
         "guzzlehttp/guzzle": "^7.7",
         "symfony/cache": "^5.4"

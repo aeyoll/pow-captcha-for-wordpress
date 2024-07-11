@@ -109,6 +109,11 @@ final class Widget
      */
     public function validate_captcha($challenge, $nonce): bool
     {
+        // If the challenge or the nonce is empty, captcha will never be valid
+        if (!$challenge || !$nonce) {
+            return false;
+        }
+
         $url = sprintf('Verify?challenge=%s&nonce=%s', $challenge, $nonce);
 
         try {

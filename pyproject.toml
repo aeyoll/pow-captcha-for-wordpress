@@ -1,0 +1,12 @@
+[bumpver]
+current_version = "1.0.2"
+version_pattern = "MAJOR.MINOR.PATCH"
+
+[bumpver.file_patterns]
+"composer.json" = [
+  '"version": "{version}",$',
+]
+"pow-captcha-for-wordpress.php" = [
+  "Version: {version}$",
+  "define('POW_CAPTCHA_VERSION', '{version}');$",
+]

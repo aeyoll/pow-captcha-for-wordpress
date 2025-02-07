@@ -35,6 +35,13 @@ if (is_null(Core::$instance)) {
     $admin = new Admin();
     $admin->init();
 
-    $cf7 = new ContactForm7();
-    $cf7->init();
+    if (class_exists('WPCF7_Submission')) {
+        $cf7 = new ContactForm7();
+        $cf7->init();
+    }
+
+    if (class_exists('GFCommon')) {
+        $gf = new GravityForms();
+        $gf->init();
+    }
 }

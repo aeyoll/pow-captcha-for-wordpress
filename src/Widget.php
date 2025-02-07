@@ -209,17 +209,6 @@ final class Widget
                     // Init captcha on document load
                     powCaptchaLoad();
                 });
-
-                // Reload captchas after form submission
-                document.addEventListener('wpcf7submit', function(event) {
-                    if (!window.isPowCaptchaLoading) {
-                        // Allow to reset the captcha
-                        window.sqrCaptchaInitDone = false;
-
-                        // Fetch a new challenge using an API call
-                        powCaptchaLoad();
-                    }
-                });
             </script>
         EOD;
     }

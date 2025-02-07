@@ -76,6 +76,16 @@ class ContactForm7
         }
 
         $this->widget->pow_captcha_enqueue_widget_scripts();
+
+        wp_add_inline_script('pow-captcha', '
+            // Reload captchas after form submission
+            document.addEventListener("wpcf7submit", function(event) {
+                if (!window.isPowCaptchaLoading) {
+                    window.sqrCaptchaInitDone = false;
+                    powCaptchaLoad();
+                }
+            });
+        ');
     }
 
 

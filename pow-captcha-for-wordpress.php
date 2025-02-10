@@ -23,6 +23,7 @@ use Aeyoll\PowCaptchaForWordpress\Core;
 use Aeyoll\PowCaptchaForWordpress\Settings;
 use Aeyoll\PowCaptchaForWordpress\Admin;
 use Aeyoll\PowCaptchaForWordpress\Modules\ContactForm7;
+use Aeyoll\PowCaptchaForWordpress\Modules\GravityForms;
 
 // This creates the singleton instance
 if (is_null(Core::$instance)) {

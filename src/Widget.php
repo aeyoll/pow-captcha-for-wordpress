@@ -144,8 +144,7 @@ final class Widget
      */
     public function pow_captcha_placeholder()
     {
-        return <<<EOD
-            <div class="pow-captcha-placeholder"></div>
+        return '<div class="pow-captcha-placeholder"></div>
 
             <script>
                 // Prevent multiple ajax calls
@@ -153,19 +152,19 @@ final class Widget
 
                 function powCaptchaLoad() {
                     window.isPowCaptchaLoading = true;
-                    const url = '/wp-content/plugins/pow-captcha-for-wordpress/ajax.php';
-                    const selector = '.pow-captcha-placeholder';
-                    let captchaHtml = '';
+                    const url = \'/wp-content/plugins/pow-captcha-for-wordpress/ajax.php\';
+                    const selector = \'.pow-captcha-placeholder\';
+                    let captchaHtml = \'\';
 
                     window.myCaptchaCallback = (nonce) => {
-                        Array.from(document.querySelectorAll("input[name='nonce']")).forEach(e => e.value = nonce);
-                        Array.from(document.querySelectorAll("input[type='submit']")).forEach(e => e.disabled = false);
-                        Array.from(document.querySelectorAll("button[type='submit']")).forEach(e => e.disabled = false);
+                        Array.from(document.querySelectorAll("input[name=\'nonce\']")).forEach(e => e.value = nonce);
+                        Array.from(document.querySelectorAll("input[type=\'submit\']")).forEach(e => e.disabled = false);
+                        Array.from(document.querySelectorAll("button[type=\'submit\']")).forEach(e => e.disabled = false);
                     };
 
                     const captchas = Array.from(document.querySelectorAll(selector));
 
-                    // If there's no captcha on the page, abort
+                    // If there\'s no captcha on the page, abort
                     if (captchas.length <= 0) {
                         return;
                     }
@@ -187,23 +186,22 @@ final class Widget
                             window.isPowCaptchaLoading = false;
                         })
                     .catch(error => {
-                        console.error('Error:', error);
+                        console.error(\'Error:\', error);
 
                         // Reset loader
                         window.isPowCaptchaLoading = false;
                     });
                 }
 
-                document.addEventListener('DOMContentLoaded', function() {
-                    if (typeof window.myCaptchaCallback === 'function') {
+                document.addEventListener(\'DOMContentLoaded\', function() {
+                    if (typeof window.myCaptchaCallback === \'function\') {
                         return;
                     }
 
                     // Init captcha on document load
                     powCaptchaLoad();
                 });
-            </script>
-        EOD;
+            </script>';
     }
 
     /**
@@ -235,20 +233,18 @@ final class Widget
      */
     public function pow_captcha_generate_widget_tag(string $api_url, string $challenge)
     {
-        $form = <<<EOD
-        <style>
+        $form = '<style>
         .sqr-captcha-hidden {
             display: none !important;
         }
         </style>
-        <input type="hidden" name="challenge" value="$challenge" />
+        <input type="hidden" name="challenge" value="' . esc_attr($challenge) . '" />
         <input type="hidden" name="nonce" />
         <div class="captcha-container"
-             data-sqr-captcha-url="$api_url"
-             data-sqr-captcha-challenge="$challenge"
+             data-sqr-captcha-url="' . esc_url($api_url) . '"
+             data-sqr-captcha-challenge="' . esc_attr($challenge) . '"
              data-sqr-captcha-callback="myCaptchaCallback">
-        </div>
-        EOD;
+        </div>';
 
         return $form;
     }

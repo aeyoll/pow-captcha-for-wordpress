@@ -17,11 +17,13 @@ class Settings
     {
         register_setting(
             PowCaptchaForWordpressCore::$option_group,
-            PowCaptchaForWordpressCore::$option_captcha_api_token
+            PowCaptchaForWordpressCore::$option_captcha_api_token,
+            'sanitize_text_field'
         );
         register_setting(
             PowCaptchaForWordpressCore::$option_group,
-            PowCaptchaForWordpressCore::$option_captcha_api_url
+            PowCaptchaForWordpressCore::$option_captcha_api_url,
+            'esc_url_raw'
         );
 
         /* General section */
@@ -81,14 +83,14 @@ class Settings
         ?>
         <input
             autcomplete="none"
-            type="<?php echo $type; ?>"
-            name="<?php echo $option_name; ?>"
-            id="<?php echo $option_name; ?>"
-            value="<?php echo $value ?>" <?php echo $checked ?>>
+            type="<?php echo esc_attr($type); ?>"
+            name="<?php echo esc_attr($option_name); ?>"
+            id="<?php echo esc_attr($option_name); ?>"
+            value="<?php echo esc_attr($value) ?>" <?php echo $checked ?>>
         <label
             class="description"
-            for="<?php echo $option_name; ?>">
-            <?php echo $description ?>
+            for="<?php echo esc_attr($option_name); ?>">
+            <?php echo esc_html($description) ?>
         </label>
         <?php
     }

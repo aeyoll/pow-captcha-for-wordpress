@@ -86,7 +86,7 @@ class FileCache
         $lifetime = $this->get_file_time($lines);
 
         if ($lifetime !== 0 && $lifetime < time()) {
-            @unlink($file_name);
+            @wp_delete_file($file_name);
             return false;
         }
 
@@ -108,7 +108,7 @@ class FileCache
     public function delete($id)
     {
         $file_name = $this->get_file_name($id);
-        return unlink($file_name);
+        return wp_delete_file($file_name);
     }
 
     /**
@@ -127,7 +127,12 @@ class FileCache
             return false;
         }
 
-        return rename($tmpName, $filename);
+        global $wp_filesystem;
+        if (empty($wp_filesystem)) {
+            require_once(ABSPATH . '/wp-admin/includes/file.php');
+            WP_Filesystem();
+        }
+        return $wp_filesystem->move($tmpName, $filename);
     }
 
     /**
@@ -144,7 +149,12 @@ class FileCache
         $dir = $this->get_directory($id);
 
         if (!is_dir($dir)) {
-            if (!mkdir($dir, 0755, true)) {
+            global $wp_filesystem;
+            if (empty($wp_filesystem)) {
+                require_once(ABSPATH . '/wp-admin/includes/file.php');
+                WP_Filesystem();
+            }
+            if (!$wp_filesystem->mkdir($dir, 0755)) {
                 return false;
             }
         }

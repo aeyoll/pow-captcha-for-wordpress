@@ -1,11 +1,13 @@
 <?php
 
 /**
- * Plugin Name: POW CAPTCHA for WordPress
- * Description: Adds POW CAPTCHA verification to WordPress.
+ * Plugin Name: POW CAPTCHA
+ * Description: Adds POW CAPTCHA verification to forms.
  * Version: 1.0.4
  * Author: Jean-Philippe Bidegain
  * Author URI: https://github.com/aeyoll/pow-captcha-for-wordpress
+ * License: GPL v2 or later
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Domain Path: /languages
  * Requires PHP: 7.1
  */

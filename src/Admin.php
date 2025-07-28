@@ -39,7 +39,7 @@ class Admin
             get_admin_url() . 'options-general.php'
         ));
 
-        $settings_link = "<a href='$url'>" . __('Settings') . '</a>';
+        $settings_link = "<a href='$url'>" . __('Settings', 'pow-captcha') . '</a>';
 
         array_push(
             $links,
@@ -61,7 +61,7 @@ class Admin
             <div class="notice notice-error is-dismissible">
                 <p>
                     <strong>POW Captcha is not configured yet!</strong>
-                    Visit the <a href="<?php echo $url ?>">POW Captcha settings</a>
+                    Visit the <a href="<?php echo esc_url($url) ?>">POW Captcha settings</a>
                     and enter a valid API key and API url to complete the setup.
                 </p>
             </div>

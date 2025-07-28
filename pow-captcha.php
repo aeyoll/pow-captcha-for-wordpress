@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Plugin Name: POW CAPTCHA
- * Description: Adds POW CAPTCHA verification to forms.
+ * Plugin Name: Pow Captcha
+ * Description: Adds Pow Captcha verification to forms.
  * Version: 1.0.5
  * Author: Jean-Philippe Bidegain
  * Author URI: https://github.com/aeyoll/pow-captcha-for-wordpress

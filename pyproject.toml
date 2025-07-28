@@ -10,3 +10,6 @@ version_pattern = "MAJOR.MINOR.PATCH"
   "Version: {version}$",
   "define('POW_CAPTCHA_VERSION', '{version}');$",
 ]
+"README.md" = [
+  "Stable tag: {version}$",
+]

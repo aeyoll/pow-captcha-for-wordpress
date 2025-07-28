@@ -1,18 +1,18 @@
-=== POW CAPTCHA ===
+=== Pow Captcha ===
 Contributors: aeyoll
 Tags: captcha, security, forms, contact-form-7, gravity-forms
 Requires at least: 5.0
-Tested up to: 6.4
+Tested up to: 6.8
 Requires PHP: 7.1
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-A WordPress plugin that adds POW CAPTCHA verification to forms.
+A WordPress plugin that adds Pow Captcha verification to forms.
 
 == Description ==
 
-This plugin allows you to validate Contact Form 7 forms and Gravity Forms using POW CAPTCHA.
+This plugin allows you to validate Contact Form 7 forms and Gravity Forms using Pow Captcha.
 
 == Requirements ==
 

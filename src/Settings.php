@@ -86,7 +86,7 @@ class Settings
             type="<?php echo esc_attr($type); ?>"
             name="<?php echo esc_attr($option_name); ?>"
             id="<?php echo esc_attr($option_name); ?>"
-            value="<?php echo esc_attr($value) ?>" <?php echo $checked ?>>
+            value="<?php echo esc_attr($value) ?>" <?php echo esc_attr($checked) ?>>
         <label
             class="description"
             for="<?php echo esc_attr($option_name); ?>">

@@ -118,9 +118,9 @@ final class Widget
     }
 
     /**
-     * Enqueues the necessary scripts for the POW Captcha widget.
+     * Enqueues the necessary scripts and styles for the POW Captcha widget.
      */
-    public function pow_captcha_enqueue_widget_scripts()
+    public function pow_captcha_enqueue_widget_assets()
     {
         $plugin = Core::$instance;
 
@@ -128,8 +128,17 @@ final class Widget
             return;
         }
 
+        // Enqueue CSS
+        wp_enqueue_style(
+            'pow-captcha-css',
+            plugin_dir_url(__FILE__) . '../assets/css/pow-captcha.css',
+            array(),
+            '1.0'
+        );
+
+        // Enqueue JS
         wp_enqueue_script(
-            'pow-captcha',
+            'pow-captcha-js',
             $plugin->get_captcha_api_url() . '/static/captcha.js',
             array(),
             '1.0',
@@ -233,12 +242,7 @@ final class Widget
      */
     public function pow_captcha_generate_widget_tag(string $api_url, string $challenge)
     {
-        $form = '<style>
-        .sqr-captcha-hidden {
-            display: none !important;
-        }
-        </style>
-        <input type="hidden" name="challenge" value="' . esc_attr($challenge) . '" />
+        $form = '<input type="hidden" name="challenge" value="' . esc_attr($challenge) . '" />
         <input type="hidden" name="nonce" />
         <div class="captcha-container"
              data-sqr-captcha-url="' . esc_url($api_url) . '"

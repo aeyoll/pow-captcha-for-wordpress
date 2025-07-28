@@ -32,7 +32,7 @@ class GravityForms
             return;
         }
 
-        $this->widget->pow_captcha_enqueue_widget_scripts();
+        $this->widget->pow_captcha_enqueue_widget_assets();
 
         wp_add_inline_script('pow-captcha', '
             jQuery(document).on("gform_post_render", function() {

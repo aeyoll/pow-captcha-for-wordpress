@@ -75,7 +75,7 @@ class ContactForm7
             return;
         }
 
-        $this->widget->pow_captcha_enqueue_widget_scripts();
+        $this->widget->pow_captcha_enqueue_widget_assets();
 
         wp_add_inline_script('pow-captcha', '
             // Reload captchas after form submission

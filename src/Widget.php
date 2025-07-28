@@ -133,15 +133,23 @@ final class Widget
             'pow-captcha-css',
             plugin_dir_url(__FILE__) . '../assets/css/pow-captcha.css',
             array(),
-            '1.0'
+            '1.0.6'
         );
 
         // Enqueue JS
         wp_enqueue_script(
-            'pow-captcha-js',
+            'pow-captcha-lib-js',
             $plugin->get_captcha_api_url() . '/static/captcha.js',
             array(),
-            '1.0',
+            '1.0.6',
+            true
+        );
+
+        wp_enqueue_script(
+            'pow-captcha-js',
+            plugin_dir_url(__FILE__) . '../assets/js/pow-captcha.js',
+            array(),
+            '1.0.6',
             true
         );
     }
@@ -153,64 +161,7 @@ final class Widget
      */
     public function pow_captcha_placeholder()
     {
-        return '<div class="pow-captcha-placeholder"></div>
-
-            <script>
-                // Prevent multiple ajax calls
-                window.isPowCaptchaLoading = false;
-
-                function powCaptchaLoad() {
-                    window.isPowCaptchaLoading = true;
-                    const url = \'/wp-content/plugins/pow-captcha/ajax.php\';
-                    const selector = \'.pow-captcha-placeholder\';
-                    let captchaHtml = \'\';
-
-                    window.myCaptchaCallback = (nonce) => {
-                        Array.from(document.querySelectorAll("input[name=\'nonce\']")).forEach(e => e.value = nonce);
-                        Array.from(document.querySelectorAll("input[type=\'submit\']")).forEach(e => e.disabled = false);
-                        Array.from(document.querySelectorAll("button[type=\'submit\']")).forEach(e => e.disabled = false);
-                    };
-
-                    const captchas = Array.from(document.querySelectorAll(selector));
-
-                    // If there\'s no captcha on the page, abort
-                    if (captchas.length <= 0) {
-                        return;
-                    }
-
-                    fetch(url)
-                        .then(response => response.text())
-                        .then(html => {
-                            captchaHtml = html;
-
-                            // Assign captcha content to each captcha on the page
-                            captchas.forEach((captcha) => {
-                                captcha.innerHTML = html;
-                            });
-
-                            // Init the captcha
-                            window.sqrCaptchaInit();
-
-                            // Reset loader
-                            window.isPowCaptchaLoading = false;
-                        })
-                    .catch(error => {
-                        console.error(\'Error:\', error);
-
-                        // Reset loader
-                        window.isPowCaptchaLoading = false;
-                    });
-                }
-
-                document.addEventListener(\'DOMContentLoaded\', function() {
-                    if (typeof window.myCaptchaCallback === \'function\') {
-                        return;
-                    }
-
-                    // Init captcha on document load
-                    powCaptchaLoad();
-                });
-            </script>';
+        return '<div class="pow-captcha-placeholder"></div>';
     }
 
     /**

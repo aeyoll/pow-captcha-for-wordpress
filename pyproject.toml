@@ -6,7 +6,7 @@ version_pattern = "MAJOR.MINOR.PATCH"
 "composer.json" = [
   '"version": "{version}",$',
 ]
-"pow-captcha-for-wordpress.php" = [
+"pow-captcha.php" = [
   "Version: {version}$",
   "define('POW_CAPTCHA_VERSION', '{version}');$",
 ]

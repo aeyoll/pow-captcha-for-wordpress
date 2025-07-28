@@ -3,7 +3,7 @@
 /**
  * Plugin Name: POW CAPTCHA
  * Description: Adds POW CAPTCHA verification to forms.
- * Version: 1.0.4
+ * Version: 1.0.5
  * Author: Jean-Philippe Bidegain
  * Author URI: https://github.com/aeyoll/pow-captcha-for-wordpress
  * License: GPL v2 or later
@@ -17,7 +17,7 @@ if (!defined('WPINC')) {
     die;
 }
 
-define('POW_CAPTCHA_VERSION', '1.0.4');
+define('POW_CAPTCHA_VERSION', '1.0.5');
 
 require_once ABSPATH . '/vendor/autoload.php';
 

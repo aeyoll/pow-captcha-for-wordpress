@@ -105,7 +105,7 @@ class ContactForm7
             $spam = true;
             $submission->add_spam_log(array(
                 'agent' => 'pow-captcha',
-                'reason' => __('Captcha verification failed', 'pow-captcha-for-wordpress'),
+                'reason' => __('Captcha verification failed', 'pow-captcha'),
             ));
         }
 

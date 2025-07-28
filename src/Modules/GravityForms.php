@@ -75,13 +75,13 @@ class GravityForms
 
         if (empty($challenge) || empty($nonce)) {
             $validation_result['is_valid'] = false;
-            $form['validation_message'] = __('Please complete the captcha', 'pow-captcha-for-wordpress');
+            $form['validation_message'] = __('Please complete the captcha', 'pow-captcha');
         } else {
             $valid = $this->widget->validate_captcha($challenge, $nonce);
 
             if (!$valid) {
                 $validation_result['is_valid'] = false;
-                $form['validation_message'] = __('Captcha verification failed', 'pow-captcha-for-wordpress');
+                $form['validation_message'] = __('Captcha verification failed', 'pow-captcha');
             }
         }
 

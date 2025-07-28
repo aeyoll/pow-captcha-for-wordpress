@@ -28,7 +28,7 @@ final class Core
             self::$version = '0.0.0';
         }
 
-        $this->plugin_name = 'pow-captcha-for-wordpress';
+        $this->plugin_name = 'pow-captcha';
 
         self::$instance = $this;
     }

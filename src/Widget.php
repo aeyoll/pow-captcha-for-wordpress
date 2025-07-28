@@ -3,8 +3,8 @@
 namespace Aeyoll\PowCaptchaForWordpress;
 
 use Aeyoll\PowCaptchaForWordpress\Core;
+use Aeyoll\PowCaptchaForWordpress\FileCache;
 use GuzzleHttp\Client;
-use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
 /**
  * Class Widget
@@ -59,26 +59,22 @@ final class Widget
      */
     public function get_challenge()
     {
-
         // Define the cache key for storing the challenges
         $cache_key = 'pow_captcha_for_wordpress_challenges';
 
         // Generate a directory path to store the cache
-        $directory = get_temp_dir() . 'pow_captcha_for_wordpress-' . md5(__DIR__);
+        $directory = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'pow_captcha_for_wordpress-' . md5(__DIR__);
 
-        // Create a new filesystem cache adapter, caching the values for an hour
-        $cache = new FilesystemAdapter('pow_captcha_for_wordpress', 3600, $directory);
+        // Create a new filesystem cache
+        $cache = new FileCache(['cache_dir' => $directory]);
 
         // Retrieve the challenges from the cache using the cache key
-        $challengesCache = $cache->getItem($cache_key);
+        $challenges = $cache->get($cache_key);
 
-        if (!$challengesCache->isHit()) {
+        if ($challenges === false) {
             // If the challenges are not found in the cache, load them from the API
             $challenges = $this->load_challenges();
         } else {
-            // If the challenges are found in the cache, retrieve them
-            $challenges = $challengesCache->get();
-
             if (count($challenges) < 5) {
                 // If the number of challenges is less than 5, reload them from the API
                 $challenges = $this->load_challenges();
@@ -88,11 +84,8 @@ final class Widget
         // Get the first challenge from the array
         $challenge = array_shift($challenges);
 
-        // Update the challenges cache with the remaining challenges
-        $challengesCache->set($challenges);
-
-        // Save the challenges cache
-        $cache->save($challengesCache);
+        // Save the remaining challenges back to cache (expires in 1 hour)
+        $cache->save($cache_key, $challenges, 3600);
 
         // Return the retrieved challenge
         return $challenge;

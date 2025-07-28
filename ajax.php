@@ -15,4 +15,4 @@ header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
 header('Cache-Control: post-check=0, pre-check=0', false);
 header('Pragma: no-cache');
 
-echo wp_kses_post($cf7->pow_captcha_generate_widget_tag_from_plugin($pow_captcha_plugin_instance));
+echo $cf7->pow_captcha_generate_widget_tag_from_plugin($pow_captcha_plugin_instance);

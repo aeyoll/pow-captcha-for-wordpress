@@ -152,7 +152,7 @@ final class Widget
 
                 function powCaptchaLoad() {
                     window.isPowCaptchaLoading = true;
-                    const url = \'/wp-content/plugins/pow-captcha-for-wordpress/ajax.php\';
+                    const url = \'/wp-content/plugins/pow-captcha/ajax.php\';
                     const selector = \'.pow-captcha-placeholder\';
                     let captchaHtml = \'\';
 

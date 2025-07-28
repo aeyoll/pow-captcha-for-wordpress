@@ -11,7 +11,7 @@ class Admin
         if (is_admin()) {
             add_action('admin_menu', [$this, 'pow_captcha_options_page']);
             add_filter(
-                'plugin_action_links_pow-captcha-for-wordpress/pow-captcha-for-wordpress.php',
+                'plugin_action_links_pow-captcha/pow-captcha.php',
                 [$this, 'pow_captcha_settings_link']
             );
             add_action('admin_notices', [$this, 'pow_captcha_admin_notice__not_configured']);

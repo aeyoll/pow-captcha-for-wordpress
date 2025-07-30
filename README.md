@@ -42,3 +42,17 @@ Note, you must have "composer/installers" allowed in your `composer.json` order 
     }
 }
 ```
+
+== WP-CLI commands ==
+
+```sh
+# Configure the plugin
+wp pow-captcha set-api-key "your-secret-api-key"
+wp pow-captcha set-api-url "https://your-captcha-service.com"
+
+# Check configuration
+wp pow-captcha status
+
+# Clear cache when needed
+wp pow-captcha clear-cache
+```

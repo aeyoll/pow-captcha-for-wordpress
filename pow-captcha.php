@@ -24,6 +24,7 @@ require_once ABSPATH . '/vendor/autoload.php';
 use Aeyoll\PowCaptchaForWordpress\Core;
 use Aeyoll\PowCaptchaForWordpress\Settings;
 use Aeyoll\PowCaptchaForWordpress\Admin;
+use Aeyoll\PowCaptchaForWordpress\CliCommands;
 use Aeyoll\PowCaptchaForWordpress\Modules\ContactForm7;
 use Aeyoll\PowCaptchaForWordpress\Modules\GravityForms;
 
@@ -46,5 +47,10 @@ if (is_null(Core::$instance)) {
     if (class_exists('GFCommon')) {
         $gf = new GravityForms();
         $gf->init();
+    }
+
+    // Register WP-CLI commands if WP-CLI is available
+    if (defined('WP_CLI') && WP_CLI) {
+        WP_CLI::add_command('pow-captcha', CliCommands::class);
     }
 }

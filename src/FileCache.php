@@ -132,7 +132,7 @@ class FileCache
             require_once(ABSPATH . '/wp-admin/includes/file.php');
             WP_Filesystem();
         }
-        return $wp_filesystem->move($tmpName, $filename);
+        return $wp_filesystem->move($tmpName, $filename, true);
     }
 
     /**
@@ -149,12 +149,7 @@ class FileCache
         $dir = $this->get_directory($id);
 
         if (!is_dir($dir)) {
-            global $wp_filesystem;
-            if (empty($wp_filesystem)) {
-                require_once(ABSPATH . '/wp-admin/includes/file.php');
-                WP_Filesystem();
-            }
-            if (!$wp_filesystem->mkdir($dir, 0755)) {
+            if (!wp_mkdir_p($dir)) {
                 return false;
             }
         }

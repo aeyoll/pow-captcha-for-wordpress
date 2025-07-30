@@ -63,7 +63,7 @@ final class Widget
         $cache_key = 'pow_captcha_for_wordpress_challenges';
 
         // Generate a directory path to store the cache
-        $directory = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'pow_captcha_for_wordpress-' . md5(__DIR__);
+        $directory = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'pow_captcha_for_wordpress-' . md5(ABSPATH);
 
         // Create a new filesystem cache
         $cache = new FileCache(['cache_dir' => $directory]);

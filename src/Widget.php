@@ -133,7 +133,7 @@ final class Widget
             'pow-captcha-css',
             plugin_dir_url(__FILE__) . '../assets/css/pow-captcha.css',
             array(),
-            '1.0.9'
+            '1.0.10'
         );
 
         // Enqueue JS
@@ -141,7 +141,7 @@ final class Widget
             'pow-captcha-lib-js',
             $plugin->get_captcha_api_url() . '/static/captcha.js',
             array(),
-            '1.0.9',
+            '1.0.10',
             true
         );
 
@@ -149,7 +149,7 @@ final class Widget
             'pow-captcha-js',
             plugin_dir_url(__FILE__) . '../assets/js/pow-captcha.js',
             array(),
-            '1.0.9',
+            '1.0.10',
             true
         );
     }

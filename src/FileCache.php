@@ -17,7 +17,6 @@ namespace Aeyoll\PowCaptchaForWordpress;
  */
 class FileCache
 {
-
     /**
      * The root cache directory.
      * @var string

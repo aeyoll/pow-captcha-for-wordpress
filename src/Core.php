@@ -2,6 +2,8 @@
 
 namespace Aeyoll\PowCaptchaForWordpress;
 
+use Aeyoll\PowCaptchaForWordpress\Widget;
+
 final class Core
 {
     /**
@@ -31,6 +33,10 @@ final class Core
         $this->plugin_name = 'pow-captcha';
 
         self::$instance = $this;
+
+        // Register AJAX handlers
+        add_action('wp_ajax_pow_captcha_get_widget', [$this, 'ajax_get_widget']);
+        add_action('wp_ajax_nopriv_pow_captcha_get_widget', [$this, 'ajax_get_widget']);
     }
 
     /**
@@ -69,5 +75,37 @@ final class Core
     public function get_contact_form_7_active()
     {
         return true;
+    }
+
+    /**
+     * AJAX handler for getting the captcha widget.
+     */
+    public function ajax_get_widget()
+    {
+        // Set cache headers
+        header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+        header('Cache-Control: post-check=0, pre-check=0', false);
+        header('Pragma: no-cache');
+
+        $widget = new Widget();
+        $html = $widget->pow_captcha_generate_widget_tag_from_plugin($this);
+
+        if ($html) {
+            echo wp_kses($html, [
+                'input' => [
+                    'type' => [],
+                    'name' => [],
+                    'value' => [],
+                ],
+                'div' => [
+                    'class' => [],
+                    'data-sqr-captcha-url' => [],
+                    'data-sqr-captcha-challenge' => [],
+                    'data-sqr-captcha-callback' => [],
+                ],
+            ]);
+        }
+
+        wp_die();
     }
 }

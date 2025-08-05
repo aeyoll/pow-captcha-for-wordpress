@@ -3,4 +3,3 @@
 .editorconfig export-ignore
 .phpcs.xml export-ignore
 .distignore export-ignore
-vendor export-ignore

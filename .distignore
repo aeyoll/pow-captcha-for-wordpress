@@ -6,4 +6,3 @@ pyproject.toml
 .editorconfig
 .phpcs.xml
 composer.lock
-vendor/

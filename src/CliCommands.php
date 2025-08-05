@@ -104,7 +104,8 @@ class CliCommands
     public function clear_cache($args, $assoc_args)
     {
         $cache_key = 'pow_captcha_for_wordpress_challenges';
-        $directory = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'pow_captcha_for_wordpress-' . md5(ABSPATH);
+        $upload_dir = wp_upload_dir();
+        $directory = $upload_dir['basedir'] . DIRECTORY_SEPARATOR . 'pow-captcha-cache-' . md5(__DIR__);
 
         $cache = new FileCache(['cache_dir' => $directory]);
 
@@ -148,7 +149,8 @@ class CliCommands
         WP_CLI::log(sprintf('Configured: %s', $is_configured ? 'Yes' : 'No'));
 
         // Check cache directory
-        $directory = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'pow_captcha_for_wordpress-' . md5(__DIR__);
+        $upload_dir = wp_upload_dir();
+        $directory = $upload_dir['basedir'] . DIRECTORY_SEPARATOR . 'pow-captcha-cache';
         $cache_exists = is_dir($directory);
         WP_CLI::log(sprintf('Cache Directory: %s', $cache_exists ? 'Exists' : 'Not found'));
 

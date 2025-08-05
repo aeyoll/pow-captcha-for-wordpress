@@ -19,7 +19,7 @@ if (!defined('WPINC')) {
 
 define('POW_CAPTCHA_VERSION', '1.0.10');
 
-require_once ABSPATH . '/vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
 use Aeyoll\PowCaptchaForWordpress\Core;
 use Aeyoll\PowCaptchaForWordpress\Settings;

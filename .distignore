@@ -1,4 +1,3 @@
-# Files to exclude from distribution
 pyproject.toml
 .git/
 .gitignore

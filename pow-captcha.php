@@ -9,7 +9,7 @@
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Domain Path: /languages
- * Requires PHP: 7.1
+ * Requires PHP: 7.4
  */
 
 // If this file is called directly, abort.

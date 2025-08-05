@@ -1,5 +1,10 @@
 <?php
 
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 require_once __DIR__ . '/../../../wp-config.php';
 require_once __DIR__ . '/vendor/autoload.php';
 

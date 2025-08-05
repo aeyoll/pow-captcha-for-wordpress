@@ -44,41 +44,35 @@ class HttpClient
     {
         $url = $this->base_uri . '/' . ltrim($uri, '/');
 
-        $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, $this->timeout);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-        curl_setopt($ch, CURLOPT_MAXREDIRS, 3);
+        // Prepare WordPress HTTP API arguments
+        $wp_args = [
+            'timeout' => $this->timeout,
+            'method' => $method,
+            'sslverify' => true,
+            'redirection' => 3,
+        ];
 
         // Set headers
         $headers = array_merge($this->default_headers, $options['headers'] ?? []);
         if (!empty($headers)) {
-            $header_lines = [];
-            foreach ($headers as $key => $value) {
-                $header_lines[] = $key . ': ' . $value;
-            }
-            curl_setopt($ch, CURLOPT_HTTPHEADER, $header_lines);
+            $wp_args['headers'] = $headers;
         }
 
         // Set body for POST requests
         if ($method === 'POST' && isset($options['body'])) {
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $options['body']);
+            $wp_args['body'] = $options['body'];
         }
 
-        $response_body = curl_exec($ch);
-        $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        $error = curl_error($ch);
+        // Make the request using WordPress HTTP API
+        $response = \wp_remote_request($url, $wp_args);
 
-        curl_close($ch);
-
-        if ($response_body === false || !empty($error)) {
-            throw new \Exception('HTTP request failed: ' . esc_html($error));
+        // Check for WordPress errors
+        if (\is_wp_error($response)) {
+            throw new \Exception('HTTP request failed: ' . \esc_html($response->get_error_message()));
         }
+
+        $response_body = \wp_remote_retrieve_body($response);
+        $http_code = \wp_remote_retrieve_response_code($response);
 
         return new HttpResponse($response_body, $http_code);
     }

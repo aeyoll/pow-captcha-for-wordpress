@@ -77,7 +77,7 @@ class HttpClient
         curl_close($ch);
 
         if ($response_body === false || !empty($error)) {
-            throw new \Exception('HTTP request failed: ' . $error);
+            throw new \Exception('HTTP request failed: ' . esc_html($error));
         }
 
         return new HttpResponse($response_body, $http_code);

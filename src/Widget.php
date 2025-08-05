@@ -4,7 +4,7 @@ namespace Aeyoll\PowCaptchaForWordpress;
 
 use Aeyoll\PowCaptchaForWordpress\Core;
 use Aeyoll\PowCaptchaForWordpress\FileCache;
-use GuzzleHttp\Client;
+use Aeyoll\PowCaptchaForWordpress\HttpClient;
 
 /**
  * Class Widget
@@ -17,7 +17,7 @@ final class Widget
     /**
      * Retrieves the HTTP client for making API requests.
      *
-     * @return Client The GuzzleHttp client instance.
+     * @return HttpClient The HTTP client instance.
      */
     public function get_client()
     {
@@ -26,7 +26,7 @@ final class Widget
             $api_url = $plugin->get_captcha_api_url();
             $api_token = $plugin->get_captcha_api_token();
 
-            $this->client = new Client([
+            $this->client = new HttpClient([
                 'base_uri' => $api_url,
                 'timeout'  => 5.0,
                 'headers' => [

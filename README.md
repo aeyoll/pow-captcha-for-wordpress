@@ -3,7 +3,7 @@ Contributors: aeyoll
 Tags: captcha, security, forms, contact-form-7, gravity-forms
 Requires at least: 5.0
 Tested up to: 6.8
-Requires PHP: 7.1
+Requires PHP: 7.4
 Stable tag: 1.0.10
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -16,7 +16,7 @@ This plugin allows you to validate Contact Form 7 forms and Gravity Forms using 
 
 == Requirements ==
 
-PHP 7.1+ is needed to use this module.
+PHP 7.4+ is needed to use this module.
 
 == Installation ==
 

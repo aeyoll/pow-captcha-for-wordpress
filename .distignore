@@ -1,0 +1,9 @@
+# Files to exclude from distribution
+pyproject.toml
+.git/
+.gitignore
+.gitattributes
+.editorconfig
+.phpcs.xml
+composer.lock
+vendor/

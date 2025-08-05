@@ -52,3 +52,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Init captcha on document load
     powCaptchaLoad();
 });
+
+// On contact form 7 submit success
+document.addEventListener('wpcf7submit', function(event) {
+    window.sqrCaptchaReset();
+    powCaptchaLoad();
+});

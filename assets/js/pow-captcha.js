@@ -3,7 +3,7 @@ window.isPowCaptchaLoading = false;
 
 function powCaptchaLoad() {
     window.isPowCaptchaLoading = true;
-    const url = '/wp-admin/admin-ajax.php?action=pow_captcha_get_widget';
+    const url = powCaptchaAjax.ajax_url + '?action=pow_captcha_get_widget';
     const selector = '.pow-captcha-placeholder';
     let captchaHtml = '';
 

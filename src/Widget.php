@@ -153,6 +153,10 @@ final class Widget
             '1.0.14',
             true
         );
+
+        wp_localize_script('pow-captcha-js', 'powCaptchaAjax', array(
+            'ajax_url' => admin_url('admin-ajax.php'),
+        ));
     }
 
     /**

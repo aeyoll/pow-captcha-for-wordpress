@@ -3,7 +3,7 @@ name: Deploy WordPress Plugin
 on:
   push:
     tags:
-      - 'v*'
+      - '*'
 
 jobs:
   build-and-deploy:
@@ -32,7 +32,6 @@ jobs:
         id: get_version
         run: |
           VERSION=${GITHUB_REF#refs/tags/}
-          VERSION=${VERSION#v}
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
       - name: Install dependencies

@@ -10,6 +10,8 @@ jobs:
     name: Build and Deploy Plugin
     runs-on: ubuntu-latest
     if: "contains(github.event.head_commit.message, 'chore(version):')"
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout code

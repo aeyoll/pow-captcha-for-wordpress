@@ -53,7 +53,6 @@ jobs:
 
             This release includes the latest features and bug fixes for the Pow Captcha WordPress plugin.
           name: ${{ steps.get_version.outputs.version }}
-          tag_name: ${{ steps.get_version.outputs.version }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

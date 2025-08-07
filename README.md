@@ -11,7 +11,7 @@ This plugin allows you to validate Contact Form 7 forms and Gravity Forms using 
 - **Requires at least:** WordPress 5.0
 - **Tested up to:** WordPress 6.8
 - **Requires PHP:** 7.4+
-- **Stable tag:** 1.0.15
+- **Stable tag:** 1.0.16
 - **License:** GPLv2 or later
 - **License URI:** https://www.gnu.org/licenses/gpl-2.0.html
 

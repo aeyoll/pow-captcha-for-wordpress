@@ -22,28 +22,10 @@ This plugin allows you to validate Contact Form 7 forms and Gravity Forms using 
 
 ## Installation
 
-Require the plugin with Composer using the following command:
-
-```sh
-composer require aeyoll/pow-captcha-for-wordpress
-```
-
-Note: You must have "composer/installers" allowed in your `composer.json` in order to properly install the plugin:
-
-```json
-{
-    "name": "your/project",
-    "require": {
-        "aeyoll/pow-captcha-for-wordpress": "^1.0",
-        "composer/installers": "^2.0"
-    },
-    "config": {
-        "allow-plugins": {
-            "composer/installers": true
-        }
-    }
-}
-```
+1. Upload the plugin files to the `/wp-content/plugins/pow-captcha` directory, or install the plugin through the WordPress plugins screen directly.
+2. Activate the plugin through the 'Plugins' screen in WordPress.
+3. Use the Settings->Pow Captcha screen to configure the plugin.
+4. The plugin will automatically integrate with supported form plugins.
 
 ## WP-CLI Commands
 

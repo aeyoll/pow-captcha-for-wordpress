@@ -4,3 +4,4 @@
 .phpcs.xml export-ignore
 .distignore export-ignore
 pyproject.toml export-ignore
+.github/ export-ignore

@@ -39,10 +39,19 @@ jobs:
         run: |
           composer install --no-dev --optimize-autoloader
 
-      - name: Create ZIP archive
+      - name: Build plugin archive
         run: |
-          mkdir -p release
-          git archive --format=zip --prefix=pow-captcha/ HEAD > release/pow-captcha.zip
+          # Create clean build directory
+          mkdir -p build/pow-captcha release
+
+          # Copy files respecting .distignore
+          rsync -av --exclude-from=.distignore . build/pow-captcha/
+
+          # Include vendor directory from composer install
+          cp -r vendor/ build/pow-captcha/vendor/
+
+          # Create ZIP
+          cd build && zip -r ../release/pow-captcha.zip pow-captcha/
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
@@ -80,12 +89,6 @@ jobs:
 
           # Extract the ZIP archive created in previous step
           unzip -q ../release/pow-captcha.zip -d temp
-
-          # Copy assets if they exist
-          if [ -d "temp/pow-captcha/assets" ]; then
-            cp -r temp/pow-captcha/assets/* assets/
-            svn add assets/* --force
-          fi
 
           # Copy all files to trunk
           cp -r temp/pow-captcha/* trunk/

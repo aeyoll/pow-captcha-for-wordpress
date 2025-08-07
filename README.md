@@ -1,24 +1,26 @@
-=== Pow Captcha ===
-Contributors: aeyoll
-Tags: captcha, security, forms, contact-form-7, gravity-forms
-Requires at least: 5.0
-Tested up to: 6.8
-Requires PHP: 7.4
-Stable tag: 1.0.15
-License: GPLv2 or later
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
+# Pow Captcha
 
 A WordPress plugin that adds Pow Captcha verification to forms.
 
-== Description ==
+## Description
 
 This plugin allows you to validate Contact Form 7 forms and Gravity Forms using Pow Captcha.
 
-== Requirements ==
+**Contributors:** aeyoll
+**Tags:** captcha, security, forms, contact-form-7, gravity-forms
+**Requires at least:** WordPress 5.0
+**Tested up to:** WordPress 6.8
+**Requires PHP:** 7.4+
+**Stable tag:** 1.0.15
+**License:** GPLv2 or later
+**License URI:** https://www.gnu.org/licenses/gpl-2.0.html
 
-PHP 7.4+ is needed to use this module.
+## Requirements
 
-== Installation ==
+- PHP 7.4 or higher
+- WordPress 5.0 or higher
+
+## Installation
 
 Require the plugin with Composer using the following command:
 
@@ -26,7 +28,7 @@ Require the plugin with Composer using the following command:
 composer require aeyoll/pow-captcha-for-wordpress
 ```
 
-Note, you must have "composer/installers" allowed in your `composer.json` order to property install the plugin:
+Note: You must have "composer/installers" allowed in your `composer.json` in order to properly install the plugin:
 
 ```json
 {
@@ -43,7 +45,7 @@ Note, you must have "composer/installers" allowed in your `composer.json` order 
 }
 ```
 
-== WP-CLI commands ==
+## WP-CLI Commands
 
 ```sh
 # Configure the plugin

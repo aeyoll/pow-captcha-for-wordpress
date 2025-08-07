@@ -13,6 +13,9 @@ version_pattern = "MAJOR.MINOR.PATCH"
 "README.md" = [
   "Stable tag: {version}$",
 ]
+"readme.txt" = [
+  "Stable tag: {version}$",
+]
 "src/Widget.php" = [
   "'{version}'",
 ]

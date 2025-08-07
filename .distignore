@@ -5,5 +5,7 @@
 .github/
 .gitignore
 .phpcs.xml
+build/
+release/
 pyproject.toml
 README.md

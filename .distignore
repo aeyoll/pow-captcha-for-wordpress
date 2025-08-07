@@ -1,8 +1,9 @@
-pyproject.toml
-.git/
-.gitignore
-.gitattributes
+.distignore
 .editorconfig
-.phpcs.xml
-composer.lock
+.git/
+.gitattributes
 .github/
+.gitignore
+.phpcs.xml
+pyproject.toml
+README.md

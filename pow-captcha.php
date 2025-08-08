@@ -27,6 +27,7 @@ use Aeyoll\PowCaptchaForWordpress\Admin;
 use Aeyoll\PowCaptchaForWordpress\CliCommands;
 use Aeyoll\PowCaptchaForWordpress\Modules\ContactForm7;
 use Aeyoll\PowCaptchaForWordpress\Modules\GravityForms;
+use Aeyoll\PowCaptchaForWordpress\Modules\Login;
 
 // This creates the singleton instance
 if (is_null(Core::$instance)) {
@@ -48,6 +49,10 @@ if (is_null(Core::$instance)) {
         $gf = new GravityForms();
         $gf->init();
     }
+
+    // Login form
+    $login = new Login();
+    $login->init();
 
     // Register WP-CLI commands if WP-CLI is available
     if (defined('WP_CLI') && WP_CLI) {

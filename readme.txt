@@ -48,14 +48,13 @@ Currently, the plugin supports Contact Form 7 and Gravity Forms. More integratio
 
 == WP-CLI commands ==
 
-```sh
-# Configure the plugin
+=== Configure the plugin ===
 wp pow-captcha set-api-key "your-secret-api-key"
 wp pow-captcha set-api-url "https://your-captcha-service.com"
+wp pow-captcha set-enable-on-admin-login-form true
 
-# Check configuration
+=== Check configuration ===
 wp pow-captcha status
 
-# Clear cache when needed
+=== Clear cache when needed ===
 wp pow-captcha clear-cache
-```

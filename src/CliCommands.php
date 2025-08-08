@@ -92,6 +92,40 @@ class CliCommands
     }
 
     /**
+     * Sets the enable on admin login form option.
+     *
+     * ## OPTIONS
+     *
+     * <enable_on_admin_login_form>
+     * : The enable on admin login form option to set
+     *
+     * ## EXAMPLES
+     *
+     *     wp pow-captcha set-enable-on-admin-login-form true
+     *
+     * @param array $args The command arguments
+     * @param array $assoc_args The associative arguments
+     */
+    public function set_enable_on_admin_login_form($args, $assoc_args)
+    {
+        if (empty($args[0])) {
+            WP_CLI::error('Enable on admin login form is required.');
+            return;
+        }
+
+        $enable_on_admin_login_form = sanitize_text_field($args[0]) === 'true';
+
+        $option_name = Core::$option_enable_on_admin_login_form;
+        $updated = update_option($option_name, $enable_on_admin_login_form ? '1' : '0');
+
+        if ($updated) {
+            WP_CLI::success("Enable on admin login form has been updated successfully.");
+        } else {
+            WP_CLI::warning("Enable on admin login form was not changed (same value or update failed).");
+        }
+    }
+
+    /**
      * Clears the POW Captcha token cache.
      *
      * ## EXAMPLES
@@ -140,12 +174,14 @@ class CliCommands
 
         $api_key = $plugin->get_captcha_api_token();
         $api_url = $plugin->get_captcha_api_url();
+        $enable_on_admin_login_form = $plugin->get_enable_on_admin_login_form();
         $is_configured = $plugin->is_configured();
 
         WP_CLI::log('POW Captcha Status:');
         WP_CLI::log('------------------');
         WP_CLI::log(sprintf('API Key: %s', $api_key ? '***' . substr($api_key, -4) : 'Not set'));
         WP_CLI::log(sprintf('API URL: %s', $api_url ?: 'Not set'));
+        WP_CLI::log(sprintf('Enable on admin login form: %s', $enable_on_admin_login_form ? 'Yes' : 'No'));
         WP_CLI::log(sprintf('Configured: %s', $is_configured ? 'Yes' : 'No'));
 
         // Check cache directory

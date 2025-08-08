@@ -31,13 +31,13 @@ This plugin allows you to validate Contact Form 7 forms and Gravity Forms using 
 
 ```sh
 # Configure the plugin
-wp pow-captcha set-api-key "your-secret-api-key"
-wp pow-captcha set-api-url "https://your-captcha-service.com"
-wp pow-captcha set-enable-on-admin-login-form true
+wp pow-captcha set_api_key "your-secret-api-key"
+wp pow-captcha set_api_url "https://your-captcha-service.com"
+wp pow-captcha set_enable_on_admin_login_form true
 
 # Check configuration
 wp pow-captcha status
 
 # Clear cache when needed
-wp pow-captcha clear-cache
+wp pow-captcha clear_cache
 ```

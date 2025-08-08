@@ -23,7 +23,7 @@ class CliCommands
      *
      * ## EXAMPLES
      *
-     *     wp pow-captcha set-api-key "your-new-api-key-here"
+     *     wp pow-captcha set_api_key "your-new-api-key-here"
      *
      * @param array $args The command arguments
      * @param array $assoc_args The associative arguments
@@ -62,7 +62,7 @@ class CliCommands
      *
      * ## EXAMPLES
      *
-     *     wp pow-captcha set-api-url "https://your-captcha-api.example.com"
+     *     wp pow-captcha set_api_url "https://your-captcha-api.example.com"
      *
      * @param array $args The command arguments
      * @param array $assoc_args The associative arguments
@@ -101,7 +101,7 @@ class CliCommands
      *
      * ## EXAMPLES
      *
-     *     wp pow-captcha set-enable-on-admin-login-form true
+     *     wp pow-captcha set_enable_on_admin_login_form true
      *
      * @param array $args The command arguments
      * @param array $assoc_args The associative arguments
@@ -130,7 +130,7 @@ class CliCommands
      *
      * ## EXAMPLES
      *
-     *     wp pow-captcha clear-cache
+     *     wp pow-captcha clear_cache
      *
      * @param array $args The command arguments
      * @param array $assoc_args The associative arguments

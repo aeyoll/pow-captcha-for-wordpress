@@ -68,13 +68,13 @@ class Login
         $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
 
         if ($challenge === '' || $nonce === '') {
-            return new WP_Error('invalid_captcha', __('Please complete the captcha', 'pow-captcha'));
+            return new \WP_Error('invalid_captcha', __('Please complete the captcha', 'pow-captcha'));
         }
 
         $is_valid = $this->widget->validate_captcha($challenge, $nonce);
 
         if (!$is_valid) {
-            return new WP_Error('invalid_captcha', __('Captcha verification failed', 'pow-captcha'));
+            return new \WP_Error('invalid_captcha', __('Captcha verification failed', 'pow-captcha'));
         }
 
         return $user;

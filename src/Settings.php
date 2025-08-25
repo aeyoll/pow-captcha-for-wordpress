@@ -25,6 +25,11 @@ class Settings
             PowCaptchaForWordpressCore::$option_captcha_api_url,
             'esc_url_raw'
         );
+        register_setting(
+            PowCaptchaForWordpressCore::$option_group,
+            PowCaptchaForWordpressCore::$option_enable_on_admin_login_form,
+            'sanitize_text_field'
+        );
 
         /* General section */
 

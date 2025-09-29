@@ -18,7 +18,7 @@ final class Core
     public static $option_group = 'pow_captcha_options';
     public static $option_captcha_api_token = 'captcha_api_token';
     public static $option_captcha_api_url = 'captcha_api_url';
-    public static $option_enable_on_admin_login_form = 'enable_on_admin_login_form';
+    public static $option_enable_on_login_form = 'enable_on_login_form';
 
     /**
      * Initializes the Core class.
@@ -78,9 +78,9 @@ final class Core
      *
      * @return bool|null Returns the enable on admin login form option if set, null otherwise.
      */
-    public function get_enable_on_admin_login_form()
+    public function get_enable_on_login_form()
     {
-        return get_option(self::$option_enable_on_admin_login_form);
+        return get_option(self::$option_enable_on_login_form);
     }
 
     /**

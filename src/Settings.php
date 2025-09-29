@@ -27,7 +27,7 @@ class Settings
         );
         register_setting(
             PowCaptchaForWordpressCore::$option_group,
-            PowCaptchaForWordpressCore::$option_enable_on_admin_login_form,
+            PowCaptchaForWordpressCore::$option_enable_on_login_form,
             'sanitize_text_field'
         );
 
@@ -69,13 +69,13 @@ class Settings
 
         // Enable on admin login form
         add_settings_field(
-            'pow_captcha_settings_enable_on_admin_login_form_field',
+            'pow_captcha_settings_enable_on_login_form_field',
             'Enable on admin login form',
             [$this, 'pow_captcha_settings_field_callback'],
             'pow_captcha_admin',
             'pow_captcha_general_settings_section',
             array(
-                'option_name' => PowCaptchaForWordpressCore::$option_enable_on_admin_login_form,
+                'option_name' => PowCaptchaForWordpressCore::$option_enable_on_login_form,
                 'description' => '',
                 'type' => 'checkbox'
             )

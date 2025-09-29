@@ -51,7 +51,7 @@ Currently, the plugin supports Contact Form 7 and Gravity Forms. More integratio
 === Configure the plugin ===
 wp pow-captcha set_api_key "your-secret-api-key"
 wp pow-captcha set_api_url "https://your-captcha-service.com"
-wp pow-captcha set_enable_on_admin_login_form true
+wp pow-captcha set_enable_on_login_form true
 
 === Check configuration ===
 wp pow-captcha status

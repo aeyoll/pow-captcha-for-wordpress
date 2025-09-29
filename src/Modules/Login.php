@@ -14,7 +14,10 @@ class Login
         $this->widget = new Widget();
 
         add_action('login_form', [$this, 'render_captcha_placeholder']);
+        add_action('woocommerce_login_form', [$this, 'render_captcha_placeholder']);
+
         add_action('login_enqueue_scripts', [$this, 'enqueue_scripts']);
+        add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts']);
         add_filter('authenticate', [$this, 'validate_captcha_on_authenticate'], 30, 3);
     }
 
@@ -22,7 +25,7 @@ class Login
     {
         $plugin = Core::$instance;
 
-        if (!$plugin || !$plugin->is_configured() || !$plugin->get_enable_on_admin_login_form()) {
+        if (!$plugin || !$plugin->is_configured() || !$plugin->get_enable_on_login_form()) {
             return;
         }
 
@@ -33,7 +36,7 @@ class Login
     {
         $plugin = Core::$instance;
 
-        if (!$plugin || !$plugin->is_configured() || !$plugin->get_enable_on_admin_login_form()) {
+        if (!$plugin || !$plugin->is_configured() || !$plugin->get_enable_on_login_form()) {
             return;
         }
 
@@ -48,7 +51,7 @@ class Login
 
         $plugin = Core::$instance;
 
-        if (!$plugin || !$plugin->is_configured() || !$plugin->get_enable_on_admin_login_form()) {
+        if (!$plugin || !$plugin->is_configured() || !$plugin->get_enable_on_login_form()) {
             return $user;
         }
 

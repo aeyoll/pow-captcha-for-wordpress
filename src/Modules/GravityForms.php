@@ -22,6 +22,10 @@ class GravityForms
 
         // Validate all form submissions
         add_filter('gform_validation', [$this, 'validate_form'], 10, 2);
+
+        // Add form settings
+        add_filter('gform_form_settings', [$this, 'add_form_settings'], 10, 2);
+        add_filter('gform_pre_form_settings_save', [$this, 'save_form_settings']);
     }
 
     public function pow_captcha_enqueue_scripts($form, $ajax)
@@ -107,8 +111,41 @@ class GravityForms
     {
         $form_id = isset($form['id']) ? (int) $form['id'] : 0;
 
+        $disable_captcha = isset($form['pow_captcha_disable']) ? (bool) $form['pow_captcha_disable'] : false;
+
+        if ($disable_captcha) {
+            return true;
+        }
+
         $is_excluded = apply_filters('pow_captcha_exclude_gravity_form', false, $form_id, $form);
 
         return $is_excluded;
+    }
+
+    public function add_form_settings($settings, $form)
+    {
+        $checked = isset($form['pow_captcha_disable']) && $form['pow_captcha_disable'] ? 'checked="checked"' : '';
+
+        $settings['Form Options']['pow_captcha_disable'] = '
+            <tr>
+                <th><label for="pow_captcha_disable">' . esc_html__('POW Captcha', 'pow-captcha') . '</label></th>
+                <td>
+                    <input type="checkbox"
+                           id="pow_captcha_disable"
+                           name="pow_captcha_disable"
+                           value="1"
+                           ' . $checked . ' />
+                    <label for="pow_captcha_disable">' . esc_html__('Disable POW Captcha for this form', 'pow-captcha') . '</label>
+                </td>
+            </tr>';
+
+        return $settings;
+    }
+
+    public function save_form_settings($form)
+    {
+        $form['pow_captcha_disable'] = ! empty($_POST['pow_captcha_disable']);
+
+        return $form;
     }
 }

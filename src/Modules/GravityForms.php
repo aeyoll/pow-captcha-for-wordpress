@@ -32,6 +32,10 @@ class GravityForms
             return;
         }
 
+        if ($this->is_form_excluded($form)) {
+            return;
+        }
+
         $this->widget->pow_captcha_enqueue_widget_assets();
 
         wp_add_inline_script('pow-captcha', '
@@ -59,6 +63,10 @@ class GravityForms
             return $form_tag;
         }
 
+        if ($this->is_form_excluded($form)) {
+            return $form_tag;
+        }
+
         $captcha_html = sprintf(
             '<div class="ginput_container ginput_container_captcha">%s</div>',
             $this->widget->pow_captcha_placeholder()
@@ -70,6 +78,11 @@ class GravityForms
     public function validate_form($validation_result)
     {
         $form = $validation_result['form'];
+
+        if ($this->is_form_excluded($form)) {
+            return $validation_result;
+        }
+
         $challenge = rgpost('challenge');
         $nonce = rgpost('nonce');
 
@@ -86,6 +99,16 @@ class GravityForms
         }
 
         $validation_result['form'] = $form;
+
         return $validation_result;
+    }
+
+    protected function is_form_excluded($form)
+    {
+        $form_id = isset($form['id']) ? (int) $form['id'] : 0;
+
+        $is_excluded = apply_filters('pow_captcha_exclude_gravity_form', false, $form_id, $form);
+
+        return $is_excluded;
     }
 }

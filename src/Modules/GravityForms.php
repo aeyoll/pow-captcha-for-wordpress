@@ -5,6 +5,7 @@ namespace Aeyoll\PowCaptchaForWordpress\Modules;
 use Aeyoll\PowCaptchaForWordpress\Core;
 use Aeyoll\PowCaptchaForWordpress\Widget;
 use GFFormsModel;
+use GGFormDisplay;
 
 class GravityForms
 {
@@ -82,6 +83,10 @@ class GravityForms
     public function validate_form($validation_result)
     {
         $form = $validation_result['form'];
+
+        if (!GGFormDisplay::is_last_page($form)) {
+            return $validation_result;
+        }
 
         if ($this->is_form_excluded($form)) {
             return $validation_result;

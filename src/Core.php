@@ -19,6 +19,8 @@ final class Core
     public static $option_captcha_api_token = 'captcha_api_token';
     public static $option_captcha_api_url = 'captcha_api_url';
     public static $option_enable_on_login_form = 'enable_on_login_form';
+    public static $option_difficulty_level = 'pow_captcha_difficulty_level';
+    public static $default_difficulty_level = 5;
 
     /**
      * Initializes the Core class.
@@ -81,6 +83,18 @@ final class Core
     public function get_enable_on_login_form()
     {
         return get_option(self::$option_enable_on_login_form);
+    }
+
+    /**
+     * Retrieves the difficulty level for the captcha.
+     *
+     * @return int Returns the difficulty level (defaults to 5).
+     */
+    public function get_difficulty_level(): int
+    {
+        $level = get_option(self::$option_difficulty_level, self::$default_difficulty_level);
+
+        return (int) $level;
     }
 
     /**

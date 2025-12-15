@@ -45,7 +45,10 @@ final class Widget
      */
     public function load_challenges()
     {
-        $response = $this->get_client()->post('GetChallenges?difficultyLevel=5');
+        $plugin = Core::$instance;
+        $difficulty_level = $plugin->get_difficulty_level();
+
+        $response = $this->get_client()->post('GetChallenges?difficultyLevel=' . $difficulty_level);
         $json = $response->getBody()->getContents();
         $data = json_decode($json, true);
 

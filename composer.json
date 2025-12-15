@@ -3,7 +3,7 @@
     "description": "POW captcha for WordPress",
     "type": "wordpress-plugin",
     "license": "GPL-2.0-or-later",
-    "version": "1.0.20",
+    "version": "1.0.21",
     "require": {
     },
     "require-dev": {

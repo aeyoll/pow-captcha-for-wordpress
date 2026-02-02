@@ -6,7 +6,7 @@ use Aeyoll\PowCaptchaForWordpress\Core;
 use Aeyoll\PowCaptchaForWordpress\Widget;
 use GFCommon;
 use GFFormsModel;
-use GGFormDisplay;
+use GFFormDisplay;
 
 class GravityForms
 {
@@ -99,7 +99,7 @@ class GravityForms
     {
         $form = $validation_result['form'];
 
-        if (!GGFormDisplay::is_last_page($form)) {
+        if (!GFFormDisplay::is_last_page($form)) {
             return $validation_result;
         }
 

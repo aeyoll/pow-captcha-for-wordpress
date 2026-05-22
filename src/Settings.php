@@ -35,7 +35,7 @@ class Settings
             PowCaptchaForWordpressCore::$option_difficulty_level,
             [
                 'type' => 'integer',
-                'sanitize_callback' => 'absint',
+                'sanitize_callback' => [PowCaptchaForWordpressCore::class, 'clamp_difficulty_level'],
                 'default' => PowCaptchaForWordpressCore::$default_difficulty_level,
             ]
         );
@@ -99,10 +99,10 @@ class Settings
             'pow_captcha_general_settings_section',
             array(
                 'option_name' => PowCaptchaForWordpressCore::$option_difficulty_level,
-                'description' => 'The difficulty level for the captcha challenge (1-10). Higher values require more computational work.',
+                'description' => 'The difficulty level for the captcha challenge (5-7). Higher values require more computational work.',
                 'type' => 'number',
-                'min' => 1,
-                'max' => 10,
+                'min' => PowCaptchaForWordpressCore::$min_difficulty_level,
+                'max' => PowCaptchaForWordpressCore::$max_difficulty_level,
                 'default' => PowCaptchaForWordpressCore::$default_difficulty_level,
             )
         );

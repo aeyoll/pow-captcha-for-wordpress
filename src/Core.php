@@ -20,7 +20,9 @@ final class Core
     public static $option_captcha_api_url = 'captcha_api_url';
     public static $option_enable_on_login_form = 'enable_on_login_form';
     public static $option_difficulty_level = 'pow_captcha_difficulty_level';
-    public static $default_difficulty_level = 5;
+    public static $min_difficulty_level = 5;
+    public static $max_difficulty_level = 7;
+    public static $default_difficulty_level = 6;
 
     /**
      * Initializes the Core class.
@@ -86,15 +88,37 @@ final class Core
     }
 
     /**
+     * Clamps a difficulty level to the allowed range.
+     *
+     * @param mixed $value Raw difficulty value.
+     *
+     * @return int Difficulty level between min and max inclusive.
+     */
+    public static function clamp_difficulty_level($value): int
+    {
+        $level = absint($value);
+
+        if ($level < self::$min_difficulty_level) {
+            return self::$min_difficulty_level;
+        }
+
+        if ($level > self::$max_difficulty_level) {
+            return self::$max_difficulty_level;
+        }
+
+        return $level;
+    }
+
+    /**
      * Retrieves the difficulty level for the captcha.
      *
-     * @return int Returns the difficulty level (defaults to 5).
+     * @return int Returns the difficulty level (defaults to 6).
      */
     public function get_difficulty_level(): int
     {
         $level = get_option(self::$option_difficulty_level, self::$default_difficulty_level);
 
-        return (int) $level;
+        return self::clamp_difficulty_level($level);
     }
 
     /**

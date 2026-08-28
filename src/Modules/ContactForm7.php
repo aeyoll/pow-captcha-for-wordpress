@@ -10,6 +10,8 @@ class ContactForm7
 {
     protected $widget;
 
+    private $skip_flamingo_spam_store = false;
+
     public function init()
     {
         $this->widget = new Widget();
@@ -23,6 +25,7 @@ class ContactForm7
 
         add_action('wp_enqueue_scripts', [$this, 'pow_captcha_wpcf7_pow_captcha_enqueue_scripts'], 10, 0);
         add_filter('wpcf7_spam', [$this, 'pow_captcha_wpcf7_pow_captcha_verify_response'], 9, 1);
+        add_filter('wpcf7_flamingo_submit_if', [$this, 'pow_captcha_wpcf7_flamingo_submit_if'], 10, 1);
         add_action('wpcf7_init', [$this, 'pow_captcha_wpcf7_pow_captcha_add_form_tag_pow_captcha'], 10, 0);
         wpcf7_add_form_tag('pow_captcha', [$this, 'pow_captcha_wpcf7_pow_captcha_widget_shortcode'], ['theme']);
     }
@@ -97,7 +100,20 @@ class ContactForm7
 
         $submission = WPCF7_Submission::get_instance();
         $data = $submission->get_posted_data();
-        $valid = $this->widget->validate_captcha($data['challenge'], $data['nonce']);
+        $challenge = $data['challenge'] ?? '';
+        $nonce = $data['nonce'] ?? '';
+
+        if (!$challenge || !$nonce) {
+            $this->skip_flamingo_spam_store = true;
+            $submission->add_spam_log(array(
+                'agent' => 'pow-captcha',
+                'reason' => __('Captcha verification failed', 'pow-captcha'),
+            ));
+
+            return true;
+        }
+
+        $valid = $this->widget->validate_captcha($challenge, $nonce);
 
         if ($valid) {
             $spam = false;
@@ -110,6 +126,15 @@ class ContactForm7
         }
 
         return $spam;
+    }
+
+    public function pow_captcha_wpcf7_flamingo_submit_if($cases)
+    {
+        if ($this->skip_flamingo_spam_store) {
+            return array_values(array_diff((array) $cases, ['spam']));
+        }
+
+        return $cases;
     }
 
     public function pow_captcha_wpcf7_pow_captcha_widget_shortcode($form_tag)
